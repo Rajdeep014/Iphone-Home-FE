@@ -1,8 +1,32 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { navLists } from "../constants/index";
 import { appleImg } from "../utils/index";
+
 const Navbar = () => {
+  useGSAP(() => {
+    const navTween = gsap.timeline({
+      scrollTrigger: {
+        trigger: "header",
+        start: "top top",
+        end: "bottom top",
+      },
+    });
+    navTween.fromTo(
+      "header",
+      {
+        backgroundColor: "transparent",
+      },
+      {
+        backgroundColor: "#00000050",
+        backdropFilter: "blur(10px)",
+        duration: 1,
+        ease: "power1.inOut",
+      }
+    );
+  });
   return (
-    <header className="px-5 py-6  ">
+    <header className="px-5 py-6 fixed z-10 w-full">
       <nav className="flex justify-between w-full screen-max-width">
         <img src={appleImg} alt="Apple Logo" width={14} height={18} />
         <div className="flex justify-center gap-10 max-sm:hidden">
